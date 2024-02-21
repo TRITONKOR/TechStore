@@ -1,9 +1,9 @@
-package com.tritonkor.techstore.persistence.dao;
+package com.tritonkor.techstore.persistence.dao.json.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 
-import com.tritonkor.techstore.persistence.contracts.ClientDAO;
+import com.tritonkor.techstore.persistence.dao.contracts.ClientDAO;
 import com.tritonkor.techstore.persistence.entity.impl.Client;
 import java.io.File;
 import java.io.IOException;

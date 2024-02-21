@@ -1,4 +1,4 @@
-package com.tritonkor.techstore.persistence.contracts;
+package com.tritonkor.techstore.persistence.dao.contracts;
 
 import com.tritonkor.techstore.persistence.DAO;
 import com.tritonkor.techstore.persistence.entity.impl.Client;
