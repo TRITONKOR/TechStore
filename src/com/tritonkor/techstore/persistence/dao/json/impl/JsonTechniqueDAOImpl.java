@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class JsonTechniqueDAOImpl implements TechniqueDAO {
 
@@ -71,10 +72,9 @@ public class JsonTechniqueDAOImpl implements TechniqueDAO {
     }
 
     @Override
-    public Technique findByModel(String model) throws IOException {
+    public Set<Technique> findAllByModel(String model) throws IOException {
         Set<Technique> techniques = findAll();
         return techniques.stream()
-                .filter(a -> a.getModel() == model)
-                .findFirst().orElse(null);
+                .filter(a -> a.getModel().equals(model)).collect(Collectors.toSet());
     }
 }
