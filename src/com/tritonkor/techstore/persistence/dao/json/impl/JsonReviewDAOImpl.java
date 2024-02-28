@@ -7,17 +7,18 @@ import com.tritonkor.techstore.persistence.entity.impl.Client;
 import com.tritonkor.techstore.persistence.entity.impl.Review;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
 public class JsonReviewDAOImpl implements ReviewDAO {
 
-    private final String filePath;
+    private final Path filePath;
     private final ObjectMapper objectMapper;
 
-    public JsonReviewDAOImpl(String filePath) {
-        this.filePath = filePath;
+    public JsonReviewDAOImpl() {
+        this.filePath = JsonPathFactory.REVIEWS.getPath();
         this.objectMapper = new ObjectMapper();
     }
 
@@ -57,7 +58,7 @@ public class JsonReviewDAOImpl implements ReviewDAO {
 
     @Override
     public Set<Review> findAll() throws IOException {
-        File file = new File(filePath);
+        File file = new File(filePath.toString());
         if (!file.exists()) {
             throw new IOException();
         }
@@ -66,7 +67,7 @@ public class JsonReviewDAOImpl implements ReviewDAO {
     }
 
     private void writeDataToFile(Set<Review> reviews) throws IOException {
-        File file = new File(filePath);
+        File file = new File(filePath.toString());
         objectMapper.writeValue(file, reviews);
     }
 

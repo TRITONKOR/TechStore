@@ -8,11 +8,9 @@ import java.nio.file.Path;
 public enum JsonPathFactory {
 
     CLIENTS("clients.json"),
-    TVS("tvs.json"),
-    PHONES("phones.json"),
-    LAPTOPS("laptops.json"),
+    TECHNIQUES("techniques.json"),
     REVIEWS("reviews.json"),
-    DATA("data");;
+    DATA("data");
 
     private final String fileName;
     private static final String DATA_DIRECTORY = "data";

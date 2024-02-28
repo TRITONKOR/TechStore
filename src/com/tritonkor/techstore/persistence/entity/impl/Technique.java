@@ -1,8 +1,9 @@
-package com.tritonkor.techstore.persistence.entity;
+package com.tritonkor.techstore.persistence.entity.impl;
 
+import com.tritonkor.techstore.persistence.entity.Entity;
 import java.util.UUID;
 
-public class Technique extends Entity{
+public class Technique extends Entity {
 
     private double price;
     private final String company;

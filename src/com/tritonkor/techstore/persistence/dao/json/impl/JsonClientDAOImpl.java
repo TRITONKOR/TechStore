@@ -7,17 +7,18 @@ import com.tritonkor.techstore.persistence.dao.contracts.ClientDAO;
 import com.tritonkor.techstore.persistence.entity.impl.Client;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
 public class JsonClientDAOImpl implements ClientDAO {
 
-    private final String filePath;
+    private final Path filePath;
     private final ObjectMapper objectMapper;
 
-    public JsonClientDAOImpl(String filePath) {
-        this.filePath = filePath;
+    public JsonClientDAOImpl() {
+        this.filePath = JsonPathFactory.CLIENTS.getPath();
         this.objectMapper = new ObjectMapper();
     }
 
@@ -57,7 +58,7 @@ public class JsonClientDAOImpl implements ClientDAO {
 
     @Override
     public Set<Client> findAll() throws IOException {
-        File file = new File(filePath);
+        File file = new File(filePath.toString());
         if (!file.exists()) {
             throw new IOException();
         }
@@ -66,7 +67,7 @@ public class JsonClientDAOImpl implements ClientDAO {
     }
 
     private void writeDataToFile(Set<Client> clients) throws IOException {
-        File file = new File(filePath);
+        File file = new File(filePath.toString());
         objectMapper.writeValue(file, clients);
     }
 
