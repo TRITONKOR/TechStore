@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class JsonReviewDAOImpl implements ReviewDAO {
 
@@ -72,10 +73,10 @@ public class JsonReviewDAOImpl implements ReviewDAO {
     }
 
     @Override
-    public Review findByClient(Client client) throws IOException {
+    public Set<Review> findAllByClient(Client client) throws IOException {
         Set<Review> reviews = findAll();
         return reviews.stream()
                 .filter(a -> a.getOwner() == client)
-                .findFirst().orElse(null);
+                .collect(Collectors.toSet());
     }
 }

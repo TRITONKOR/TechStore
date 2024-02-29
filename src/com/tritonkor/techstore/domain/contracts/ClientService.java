@@ -4,6 +4,7 @@ import com.tritonkor.techstore.domain.Service;
 import com.tritonkor.techstore.domain.dto.ClientAddDTO;
 import com.tritonkor.techstore.persistence.entity.impl.Client;
 import java.io.IOException;
+import java.util.Optional;
 
 public interface ClientService extends Service<Client> {
 

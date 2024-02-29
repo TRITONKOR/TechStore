@@ -2,6 +2,7 @@ package com.tritonkor.techstore.domain.impl;
 
 import com.tritonkor.techstore.domain.contracts.ClientService;
 import com.tritonkor.techstore.domain.dto.ClientAddDTO;
+import com.tritonkor.techstore.domain.exception.EntityNotFoundException;
 import com.tritonkor.techstore.domain.exception.SignUpException;
 import com.tritonkor.techstore.persistence.dao.contracts.ClientDAO;
 import com.tritonkor.techstore.persistence.entity.impl.Client;
@@ -18,7 +19,8 @@ public class ClientServiceImpl extends GenericService<Client> implements ClientS
 
     @Override
     public Client findByUsername(String username) throws IOException {
-        return clientDAO.findByUsername(username);
+        return clientDAO.findByUsername(username)
+                .orElseThrow(() -> new EntityNotFoundException("This user does not exist"));
     }
 
     @Override

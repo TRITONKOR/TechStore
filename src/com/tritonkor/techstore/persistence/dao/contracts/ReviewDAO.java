@@ -4,8 +4,9 @@ import com.tritonkor.techstore.persistence.DAO;
 import com.tritonkor.techstore.persistence.entity.impl.Client;
 import com.tritonkor.techstore.persistence.entity.impl.Review;
 import java.io.IOException;
+import java.util.Set;
 
 public interface ReviewDAO extends DAO<Review> {
 
-    Review findByClient(Client client) throws IOException;
+    Set<Review> findAllByClient(Client client) throws IOException;
 }

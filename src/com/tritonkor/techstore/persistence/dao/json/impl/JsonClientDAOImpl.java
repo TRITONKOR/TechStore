@@ -72,10 +72,10 @@ public class JsonClientDAOImpl implements ClientDAO {
     }
 
     @Override
-    public Client findByUsername(String username) throws IOException {
+    public Optional<Client> findByUsername(String username) throws IOException {
         Set<Client> clients = findAll();
         return clients.stream()
                 .filter(a -> a.getUsername() == username)
-                .findFirst().orElse(null);
+                .findFirst();
     }
 }
