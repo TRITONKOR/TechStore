@@ -69,6 +69,7 @@ public class AuthMenuView implements Renderable{
 
         ConsoleTools.clearConsole();
         signUpService.signUp(clientService.createClient(username, password));
+        authService.authenticate(username, password);
         mainMenuView.render();
     }
 

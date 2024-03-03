@@ -43,6 +43,7 @@ public class MainMenuView implements Renderable{
                     reviewCreateShow();
                     break;
                 case 3:
+                    ConsoleTools.clearConsole();
                     return;
                 default:
                     System.out.println("Wrong choice, try again");
@@ -105,6 +106,8 @@ public class MainMenuView implements Renderable{
 
         ReviewAddDTO reviewAddDTO = new ReviewAddDTO(UUID.randomUUID(), currentClient, techniques.get(techniqueIndex - 1), text, reviewGrade, LocalDateTime.now().truncatedTo(
                 ChronoUnit.MINUTES));
+        ConsoleTools.clearConsole();
+        System.out.println("Review has been created");
         reviewService.add(reviewAddDTO);
     }
 
