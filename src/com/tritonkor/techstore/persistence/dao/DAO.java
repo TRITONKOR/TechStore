@@ -1,16 +1,16 @@
-package com.tritonkor.techstore.persistence;
+package com.tritonkor.techstore.persistence.dao;
 
 import com.tritonkor.techstore.persistence.entity.Entity;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.UUID;
 
 public interface DAO<E extends Entity> {
 
     Optional<E> findById(UUID id) throws IOException;
 
-    Set<E> findAll() throws IOException;
+    List<E> findAll() throws IOException;
 
     E save(E entity) throws IOException;
 

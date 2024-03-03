@@ -16,4 +16,6 @@ public interface SignUpService {
      * @param clientAddDTO    The DTO containing information to create the new user.
      */
     void signUp(ClientAddDTO clientAddDTO) throws IOException;
+
+    boolean checkUsernameAvailability(String username) throws IOException;
 }

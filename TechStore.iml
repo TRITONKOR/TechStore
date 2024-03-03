@@ -9,6 +9,9 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="jackson-databind-2.16.1" level="project" />
     <orderEntry type="library" name="jackson-core-2.16.1" level="project" />
+    <orderEntry type="library" name="bcrypt-0.3" level="project" />
+    <orderEntry type="library" name="jackson-annotations-2.16.1" level="project" />
+    <orderEntry type="library" name="jackson-datatype-jsr310-2.16.1" level="project" />
   </component>
   <component name="SonarLintModuleSettings">
     <option name="uniqueId" value="889d6589-6b4c-42ae-82eb-b56d55dfdd7a" />

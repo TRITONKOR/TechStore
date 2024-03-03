@@ -11,4 +11,6 @@ public interface ClientService extends Service<Client> {
     Client findByUsername(String username) throws IOException;
 
     Client add(ClientAddDTO clientAddDTO) throws IOException;
+
+    ClientAddDTO createClient(String username, String rawPassword) throws IOException;
 }

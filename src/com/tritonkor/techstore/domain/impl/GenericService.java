@@ -2,9 +2,10 @@ package com.tritonkor.techstore.domain.impl;
 
 import com.tritonkor.techstore.domain.Service;
 import com.tritonkor.techstore.domain.exception.EntityNotFoundException;
-import com.tritonkor.techstore.persistence.DAO;
+import com.tritonkor.techstore.persistence.dao.DAO;
 import com.tritonkor.techstore.persistence.entity.Entity;
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -23,7 +24,7 @@ public class GenericService<E extends Entity> implements Service<E> {
     }
 
     @Override
-    public Set<E> getAll() throws IOException {
+    public List<E> getAll() throws IOException {
         return dao.findAll();
     }
 

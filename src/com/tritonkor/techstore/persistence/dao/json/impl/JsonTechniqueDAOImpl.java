@@ -2,11 +2,16 @@ package com.tritonkor.techstore.persistence.dao.json.impl;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.tritonkor.techstore.persistence.dao.contracts.TechniqueDAO;
 import com.tritonkor.techstore.persistence.entity.impl.Technique;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
@@ -19,12 +24,12 @@ public class JsonTechniqueDAOImpl implements TechniqueDAO {
 
     public JsonTechniqueDAOImpl() {
         this.filePath = JsonPathFactory.TECHNIQUES.getPath();
-        this.objectMapper = new ObjectMapper();
+        this.objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
     }
 
     @Override
     public Technique save(Technique technique) throws IOException {
-        Set<Technique> techniques = findAll();
+        List<Technique> techniques = findAll();
         techniques.add(technique);
         writeDataToFile(techniques);
         return technique;
@@ -32,7 +37,7 @@ public class JsonTechniqueDAOImpl implements TechniqueDAO {
 
     @Override
     public boolean update(Technique technique) throws IOException {
-        Set<Technique> techniques = findAll();
+        List<Technique> techniques = findAll();
         techniques.removeIf(a -> a.getId() == technique.getId());
         techniques.add(technique);
         writeDataToFile(techniques);
@@ -42,7 +47,7 @@ public class JsonTechniqueDAOImpl implements TechniqueDAO {
 
     @Override
     public boolean delete(UUID techniqueId) throws IOException {
-        Set<Technique> techniques = findAll();
+        List<Technique> techniques = findAll();
         techniques.removeIf(a -> a.getId() == techniqueId);
         writeDataToFile(techniques);
         return true;
@@ -50,31 +55,34 @@ public class JsonTechniqueDAOImpl implements TechniqueDAO {
 
     @Override
     public Optional<Technique> findById(UUID techniqueId) throws IOException {
-        Set<Technique> techniques = findAll();
+        List<Technique> techniques = findAll();
         return techniques.stream()
                 .filter(a -> a.getId() == techniqueId)
                 .findFirst();
     }
 
     @Override
-    public Set<Technique> findAll() throws IOException {
+    public List<Technique> findAll() throws IOException {
         File file = new File(filePath.toString());
         if (!file.exists()) {
-            throw new IOException();
+            Files.createFile(filePath);
+        }
+        if (file.length() == 0) {
+            return new ArrayList<>();
         }
 
-        return objectMapper.readValue(file, new TypeReference<Set<Technique>>() {});
+        return objectMapper.readValue(file, new TypeReference<List<Technique>>() {});
     }
 
-    private void writeDataToFile(Set<Technique> techniques) throws IOException {
+    private void writeDataToFile(List<Technique> techniques) throws IOException {
         File file = new File(filePath.toString());
         objectMapper.writeValue(file, techniques);
     }
 
     @Override
-    public Set<Technique> findAllByModel(String model) throws IOException {
-        Set<Technique> techniques = findAll();
+    public List<Technique> findAllByModel(String model) throws IOException {
+        List<Technique> techniques = findAll();
         return techniques.stream()
-                .filter(a -> a.getModel().equals(model)).collect(Collectors.toSet());
+                .filter(a -> a.getModel().equals(model)).toList();
     }
 }

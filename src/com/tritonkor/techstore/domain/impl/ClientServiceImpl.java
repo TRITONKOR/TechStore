@@ -7,6 +7,8 @@ import com.tritonkor.techstore.domain.exception.SignUpException;
 import com.tritonkor.techstore.persistence.dao.contracts.ClientDAO;
 import com.tritonkor.techstore.persistence.entity.impl.Client;
 import java.io.IOException;
+import java.util.UUID;
+import org.mindrot.bcrypt.BCrypt;
 
 public class ClientServiceImpl extends GenericService<Client> implements ClientService {
 
@@ -15,6 +17,12 @@ public class ClientServiceImpl extends GenericService<Client> implements ClientS
     public ClientServiceImpl(ClientDAO clientDAO) {
         super(clientDAO);
         this.clientDAO = clientDAO;
+    }
+
+    public ClientAddDTO createClient(String username, String rawPassword) throws IOException {
+        ClientAddDTO clientAddDTO = new ClientAddDTO(UUID.randomUUID(), username, rawPassword);
+
+        return clientAddDTO;
     }
 
     @Override
@@ -27,7 +35,7 @@ public class ClientServiceImpl extends GenericService<Client> implements ClientS
     public Client add(ClientAddDTO clientAddDTO) throws IOException {
         try {
             var client = new Client(clientAddDTO.getId(), clientAddDTO.getUsername(),
-                    clientAddDTO.getHashPassword());
+                    BCrypt.hashpw(clientAddDTO.getRawPassword(), BCrypt.gensalt()));
             clientDAO.save(client);
             return client;
         } catch (RuntimeException e) {

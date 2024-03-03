@@ -1,11 +1,18 @@
 package com.tritonkor.techstore.persistence.entity.impl;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 /**
  * The {@code Grade} class represents a grade with its associated properties.
  */
+
+@JsonPropertyOrder({"grade", "MAX_GRADE"})
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Grade {
 
-    private final int MAX_GRADE = 5;
+    private final int MAX_GRADE = 10;
 
     private int grade;
 
@@ -14,7 +21,13 @@ public class Grade {
      *
      * @param grade The grade value.
      */
-    public Grade(int grade) {
+    public Grade(@JsonProperty("grade") int grade) {
+
+        if (grade > 10) {
+            grade = 10;
+        } else if (grade < 1) {
+            grade = 1;
+        }
         this.grade = grade;
     }
 
@@ -25,6 +38,15 @@ public class Grade {
      */
     public int getGrade() {
         return grade;
+    }
+
+    /**
+     * Gets the max grade value.
+     *
+     * @return The grade value.
+     */
+    public int getMaxGrade() {
+        return MAX_GRADE;
     }
 
     /**

@@ -1,28 +1,36 @@
 package com.tritonkor.techstore.persistence.dao.json.impl;
 
-public class JsonDAOFactory {
+import com.tritonkor.techstore.persistence.dao.DAOFactory;
+import com.tritonkor.techstore.persistence.dao.contracts.ClientDAO;
+import com.tritonkor.techstore.persistence.dao.contracts.ReviewDAO;
+import com.tritonkor.techstore.persistence.dao.contracts.TechniqueDAO;
 
-    private JsonTechniqueDAOImpl jsonTechniqueDAO;
-    private JsonReviewDAOImpl jsonReviewDAO;
-    private JsonClientDAOImpl jsonClientDAO;
+public class JsonDAOFactory extends DAOFactory {
+
+    private JsonTechniqueDAOImpl jsonTechniqueDAOImpl;
+    private JsonReviewDAOImpl jsonReviewDAOImpl;
+    private JsonClientDAOImpl jsonClientDAOImpl;
 
     private JsonDAOFactory() {
 
-        jsonClientDAO = new JsonClientDAOImpl();
-        jsonClientDAO = new JsonClientDAOImpl();
-        jsonReviewDAO = new JsonReviewDAOImpl();
+        jsonClientDAOImpl = new JsonClientDAOImpl();
+        jsonTechniqueDAOImpl = new JsonTechniqueDAOImpl();
+        jsonReviewDAOImpl = new JsonReviewDAOImpl();
     }
 
-    public JsonTechniqueDAOImpl getJsonTechniqueDAO() {
-        return jsonTechniqueDAO;
+    @Override
+    public ClientDAO getClientDAO() {
+        return jsonClientDAOImpl;
     }
 
-    public JsonReviewDAOImpl getJsonReviewDAO() {
-        return jsonReviewDAO;
+    @Override
+    public ReviewDAO getReviewDAO() {
+        return jsonReviewDAOImpl;
     }
 
-    public JsonClientDAOImpl getJsonClientDAO() {
-        return jsonClientDAO;
+    @Override
+    public TechniqueDAO getTechniqueDAO() {
+        return jsonTechniqueDAOImpl;
     }
 
     public static JsonDAOFactory getInstance() {

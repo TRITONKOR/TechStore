@@ -2,24 +2,24 @@ package com.tritonkor.techstore.domain.impl;
 
 import com.tritonkor.techstore.domain.contracts.TechniqueService;
 import com.tritonkor.techstore.domain.dto.TechniqueAddDTO;
-import com.tritonkor.techstore.persistence.DAO;
+import com.tritonkor.techstore.persistence.dao.DAO;
 import com.tritonkor.techstore.persistence.dao.contracts.TechniqueDAO;
 import com.tritonkor.techstore.persistence.entity.impl.Technique;
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 
 public class TechniqueServiceImpl extends GenericService<Technique> implements TechniqueService {
 
     private TechniqueDAO techniqueDAO;
 
-    public TechniqueServiceImpl(DAO<Technique> dao,
-            TechniqueDAO techniqueDAO) {
-        super(dao);
+    public TechniqueServiceImpl(TechniqueDAO techniqueDAO) {
+        super(techniqueDAO);
         this.techniqueDAO = techniqueDAO;
     }
 
     @Override
-    public Set<Technique> findAllByModel(String model) throws IOException {
+    public List<Technique> findAllByModel(String model) throws IOException {
         return techniqueDAO.findAllByModel(model);
     }
 

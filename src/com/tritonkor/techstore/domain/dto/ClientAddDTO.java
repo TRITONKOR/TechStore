@@ -6,19 +6,19 @@ import java.util.UUID;
 public class ClientAddDTO extends Entity {
 
     private final  String username;
-    private final String hashPassword;
+    private final String rawPassword;
 
-    public ClientAddDTO(UUID id, String username, String hashPassword) {
+    public ClientAddDTO(UUID id, String username, String rawPassword) {
         super(id);
         this.username = username;
-        this.hashPassword = hashPassword;
+        this.rawPassword = rawPassword;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public String getHashPassword() {
-        return hashPassword;
+    public String getRawPassword() {
+        return rawPassword;
     }
 }

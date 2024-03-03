@@ -3,11 +3,16 @@ package com.tritonkor.techstore.persistence.dao.json.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.tritonkor.techstore.persistence.dao.contracts.ClientDAO;
 import com.tritonkor.techstore.persistence.entity.impl.Client;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
@@ -19,12 +24,12 @@ public class JsonClientDAOImpl implements ClientDAO {
 
     public JsonClientDAOImpl() {
         this.filePath = JsonPathFactory.CLIENTS.getPath();
-        this.objectMapper = new ObjectMapper();
+        this.objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
     }
 
     @Override
     public Client save(Client client) throws IOException {
-        Set<Client> clients = findAll();
+        List<Client> clients = findAll();
         clients.add(client);
         writeDataToFile(clients);
         return client;
@@ -32,7 +37,7 @@ public class JsonClientDAOImpl implements ClientDAO {
 
     @Override
     public boolean update(Client client) throws IOException {
-        Set<Client> clients = findAll();
+        List<Client> clients = findAll();
         clients.removeIf(a -> a.getId() == client.getId());
         clients.add(client);
         writeDataToFile(clients);
@@ -42,7 +47,7 @@ public class JsonClientDAOImpl implements ClientDAO {
 
     @Override
     public boolean delete(UUID clientId) throws IOException {
-        Set<Client> clients = findAll();
+        List<Client> clients = findAll();
         clients.removeIf(a -> a.getId() == clientId);
         writeDataToFile(clients);
         return true;
@@ -50,32 +55,35 @@ public class JsonClientDAOImpl implements ClientDAO {
 
     @Override
     public Optional<Client> findById(UUID clientId) throws IOException {
-        Set<Client> clients = findAll();
+        List<Client> clients = findAll();
         return clients.stream()
                 .filter(a -> a.getId() == clientId)
                 .findFirst();
     }
 
     @Override
-    public Set<Client> findAll() throws IOException {
+    public List<Client> findAll() throws IOException {
         File file = new File(filePath.toString());
         if (!file.exists()) {
-            throw new IOException();
+            Files.createFile(filePath);
+        }
+        if (file.length() == 0) {
+            return new ArrayList<>();
         }
 
-        return objectMapper.readValue(file, new TypeReference<Set<Client>>() {});
+        return objectMapper.readValue(file, new TypeReference<List<Client>>() {});
     }
 
-    private void writeDataToFile(Set<Client> clients) throws IOException {
+    private void writeDataToFile(List<Client> clients) throws IOException {
         File file = new File(filePath.toString());
         objectMapper.writeValue(file, clients);
     }
 
     @Override
     public Optional<Client> findByUsername(String username) throws IOException {
-        Set<Client> clients = findAll();
+        List<Client> clients = findAll();
         return clients.stream()
-                .filter(a -> a.getUsername() == username)
+                .filter(a -> a.getUsername().equals(username))
                 .findFirst();
     }
 }

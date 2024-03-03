@@ -9,8 +9,7 @@ public enum JsonPathFactory {
 
     CLIENTS("clients.json"),
     TECHNIQUES("techniques.json"),
-    REVIEWS("reviews.json"),
-    DATA("data");
+    REVIEWS("reviews.json");
 
     private final String fileName;
     private static final String DATA_DIRECTORY = "data";
