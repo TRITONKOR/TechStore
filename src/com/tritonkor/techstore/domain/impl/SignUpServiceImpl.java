@@ -6,11 +6,7 @@ import com.tritonkor.techstore.domain.dto.ClientAddDTO;
 import com.tritonkor.techstore.domain.exception.AuthException;
 import com.tritonkor.techstore.domain.exception.SignUpException;
 import com.tritonkor.techstore.persistence.dao.contracts.ClientDAO;
-import com.tritonkor.techstore.persistence.entity.impl.Client;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.Properties;
 
 /**
  * The SignUpServiceImpl class is an implementation of the SignUpService interface, providing user
@@ -18,20 +14,29 @@ import java.util.Properties;
  */
 final class SignUpServiceImpl implements SignUpService {
 
+    /** The client service used for user-related operations. */
     private final ClientService clientService;
 
+    /** The client data access object. */
     private final ClientDAO clientDAO;
 
     /**
-     * Constructs a new SignUpServiceImpl with the specified UserService.
+     * Constructs a new SignUpServiceImpl with the specified ClientService.
      *
-     * @param clientService the user service used for user-related operations.
+     * @param clientService the client service used for client-related operations.
      */
     SignUpServiceImpl(ClientService clientService, ClientDAO clientDAO) {
         this.clientService = clientService;
         this.clientDAO = clientDAO;
     }
 
+    /**
+     * Checks the availability of a username for registration.
+     *
+     * @param username The username to check.
+     * @return {@code true} if the username is available, {@code false} otherwise.
+     * @throws IOException if an I/O error occurs.
+     */
     @Override
     public boolean checkUsernameAvailability(String username) throws IOException {
         try {
@@ -44,11 +49,10 @@ final class SignUpServiceImpl implements SignUpService {
     }
 
     /**
-     * Registers a new user with the provided user details, input verification code, and the
-     * generated verification code.
+     * Registers a new client with the provided client details
      *
-     * @param clientAddDTO the user details for registration.
-     * @throws SignUpException if the verification code is incorrect or has expired.
+     * @param clientAddDTO the client details for registration.
+     * @throws IOException if an I/O error occurs.
      */
     public void signUp(ClientAddDTO clientAddDTO) throws IOException {
 

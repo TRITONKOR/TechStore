@@ -10,10 +10,19 @@ import com.tritonkor.techstore.ui.ConsoleTools;
 import com.tritonkor.techstore.ui.MainMenuView;
 import java.io.IOException;
 
+/**
+ * The {@code Application} class represents the main entry point of the application.
+ */
 public final class Application {
 
+    /**
+     * The DAO factory for creating data access objects.
+     */
     public static DAOFactory jsonDAOFactory;
 
+    /**
+     * Initializes the application by creating service and view instances and starting the main menu.
+     */
     static void init() {
         jsonDAOFactory = DAOFactory.getDAOFactory();
 

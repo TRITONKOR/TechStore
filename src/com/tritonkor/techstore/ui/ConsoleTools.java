@@ -4,9 +4,16 @@ import static java.lang.System.in;
 
 import java.util.Scanner;
 
+/**
+ * The {@code ConsoleTools} class provides utility methods for interacting with the console.
+ */
 public class ConsoleTools {
 
     private static Scanner scanner = new Scanner(in);
+
+    /**
+     * Clears the console screen.
+     */
     public static void clearConsole() {
         System.out.print("\033[H\033[2J"); // ANSI escape sequence for clearing the console
         System.out.flush();
@@ -25,6 +32,11 @@ public class ConsoleTools {
                         + " \\______/");
     }
 
+    /**
+     * Gets user input from the console.
+     *
+     * @return The user input as a String.
+     */
     public static String getUserText() {
         return scanner.nextLine();
     }

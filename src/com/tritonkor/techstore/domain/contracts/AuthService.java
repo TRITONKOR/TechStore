@@ -11,7 +11,7 @@ import java.io.IOException;
 public interface AuthService {
 
     /**
-     * Authenticates a user based on the provided username and password.
+     * Authenticates a client based on the provided username and password.
      *
      * @param username The username of the user attempting to authenticate.
      * @param password The password of the user attempting to authenticate.
@@ -20,17 +20,17 @@ public interface AuthService {
     boolean authenticate(String username, String password) throws IOException;
 
     /**
-     * Checks if a user is currently authenticated.
+     * Checks if a client is currently authenticated.
      *
      * @return true if a user is authenticated, false otherwise.
      */
     boolean isAuthenticated();
 
     /**
-     * Retrieves the details of the authenticated user.
+     * Retrieves the details of the authenticated client.
      *
-     * @return The User object representing the authenticated user, or null if no user is
+     * @return The Client object representing the authenticated client, or null if no client is
      * authenticated.
      */
-    Client getUser();
+    Client getClient();
 }

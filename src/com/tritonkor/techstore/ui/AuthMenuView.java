@@ -6,6 +6,10 @@ import com.tritonkor.techstore.domain.contracts.SignUpService;
 import com.tritonkor.techstore.domain.exception.AuthException;
 import java.io.IOException;
 
+/**
+ * The {@code AuthMenuView} class represents the user interface for authentication-related actions.
+ * It allows users to sign up, log in, and exit the application.
+ */
 public class AuthMenuView implements Renderable{
 
     private final ClientService clientService;
@@ -14,6 +18,14 @@ public class AuthMenuView implements Renderable{
 
     private final MainMenuView mainMenuView;
 
+    /**
+     * Constructs a new instance of AuthMenuView.
+     *
+     * @param clientService The client service.
+     * @param authService   The authentication service.
+     * @param signUpService The sign-up service.
+     * @param mainMenuView  The main menu view.
+     */
     public AuthMenuView(ClientService clientService, AuthService authService, SignUpService signUpService, MainMenuView mainMenuView) {
         this.clientService = clientService;
         this.signUpService = signUpService;
@@ -21,6 +33,11 @@ public class AuthMenuView implements Renderable{
         this.mainMenuView = mainMenuView;
     }
 
+    /**
+     * Renders the authentication menu, allowing users to sign up, log in, or exit the application.
+     *
+     * @throws IOException if an I/O error occurs.
+     */
     @Override
     public void render() throws IOException {
         while (true) {
@@ -45,6 +62,9 @@ public class AuthMenuView implements Renderable{
         }
     }
 
+    /**
+     * Displays the authentication menu options.
+     */
     @Override
     public void showMenu() {
         System.out.println("Choose what you want:");
@@ -54,6 +74,11 @@ public class AuthMenuView implements Renderable{
         System.out.print("Your choose:");
     }
 
+    /**
+     * Displays the sign-up form, prompts the client for input, and processes the sign-up operation.
+     *
+     * @throws IOException if an I/O error occurs.
+     */
     private void signUpShow() throws IOException{
         System.out.println("Enter your username: ");
         String username = ConsoleTools.getUserText();
@@ -73,6 +98,11 @@ public class AuthMenuView implements Renderable{
         mainMenuView.render();
     }
 
+    /**
+     * Displays the log-in form, prompts the client for input, and processes the log-in operation.
+     *
+     * @throws IOException if an I/O error occurs.
+     */
     private void logInShow() throws IOException{
         System.out.println("Enter your username: ");
         String username = ConsoleTools.getUserText();

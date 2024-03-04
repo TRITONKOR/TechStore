@@ -15,6 +15,10 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
+/**
+ * The {@code MainMenuView} class represents the main menu of the application, providing options for
+ * viewing and leaving reviews.
+ */
 public class MainMenuView implements Renderable{
 
     private final ReviewService reviewService;
@@ -22,15 +26,27 @@ public class MainMenuView implements Renderable{
     private final TechniqueService techniqueService;
     private Client currentClient;
 
+    /**
+     * Constructs a new instance of MainMenuView.
+     *
+     * @param reviewService    The review service.
+     * @param authService      The authentication service.
+     * @param techniqueService The technique service.
+     */
     public MainMenuView(ReviewService reviewService, AuthService authService, TechniqueService techniqueService) {
         this.reviewService = reviewService;
         this.authService = authService;
         this.techniqueService = techniqueService;
     }
 
+    /**
+     * Renders the main menu, allowing users to view reviews, leave reviews, or exit the application.
+     *
+     * @throws IOException if an I/O error occurs.
+     */
     @Override
     public void render() throws IOException {
-        currentClient = authService.getUser();
+        currentClient = authService.getClient();
 
         while (true) {
             showMenu();
@@ -51,6 +67,9 @@ public class MainMenuView implements Renderable{
         }
     }
 
+    /**
+     * Displays the main menu options.
+     */
     @Override
     public void showMenu() {
         System.out.println("Choose what you want:");
@@ -60,6 +79,11 @@ public class MainMenuView implements Renderable{
         System.out.print("Your choose:");
     }
 
+    /**
+     * Displays the list of techniques to choose from when leaving a review.
+     *
+     * @param techniques The list of techniques.
+     */
     private void showTechniquesList(List<Technique> techniques) {
         int i = 1;
         for (Technique technique : techniques) {
@@ -68,6 +92,12 @@ public class MainMenuView implements Renderable{
         }
     }
 
+    /**
+     * Displays the form for creating a new review, prompts the user for input, and processes the
+     * review creation.
+     *
+     * @throws IOException if an I/O error occurs.
+     */
     private void reviewCreateShow() throws IOException {
         List<Technique> techniques = techniqueService.getAll();
 
@@ -110,6 +140,12 @@ public class MainMenuView implements Renderable{
         System.out.println("Review has been created");
         reviewService.add(reviewAddDTO);
     }
+
+    /**
+     * Displays the list of reviews based on the user's choice (all reviews or only the user's reviews).
+     *
+     * @throws IOException if an I/O error occurs.
+     */
 
     private void reviewsShow() throws IOException {
         Scanner scanner = new Scanner(System.in);

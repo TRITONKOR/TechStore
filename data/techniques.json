@@ -1,0 +1,16 @@
+[ {
+  "id" : "3c222769-7f59-487e-ba84-d57331977af8",
+  "price" : 20.1,
+  "company" : "Samsung",
+  "model" : "celeron"
+}, {
+  "id" : "bfda9a85-e63b-4edf-b335-7a92332d20c3",
+  "price" : 20.1,
+  "company" : "Samsung",
+  "model" : "celeron"
+}, {
+  "id" : "4ae61104-06ad-4304-8287-847816eb96a4",
+  "price" : 20.12,
+  "company" : "Samsgfgdfgdfgung",
+  "model" : "celedfggdfgron"
+} ]

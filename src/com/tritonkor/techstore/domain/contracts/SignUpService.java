@@ -4,16 +4,14 @@ import com.tritonkor.techstore.domain.dto.ClientAddDTO;
 import java.io.IOException;
 
 /**
- * The SignUpService interface defines the contract for user signup operations and verification code
- * management. It provides methods for user signup, generating and sending verification codes.
+ * The SignUpService interface defines the contract for client signup operations
  */
 public interface SignUpService {
 
     /**
-     * Signs up a new user based on the provided UserAddDto and verifies the user with the given
-     * verification code.
+     * Signs up a new client based on the provided ClientAddDTO
      *
-     * @param clientAddDTO    The DTO containing information to create the new user.
+     * @param clientAddDTO    The DTO containing information to create the new client.
      */
     void signUp(ClientAddDTO clientAddDTO) throws IOException;
 

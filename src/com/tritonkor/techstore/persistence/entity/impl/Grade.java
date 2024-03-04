@@ -12,8 +12,14 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Grade {
 
+    /**
+     * The maximum possible grade.
+     */
     private final int MAX_GRADE = 10;
 
+    /**
+     * The value of grade.
+     */
     private int grade;
 
     /**

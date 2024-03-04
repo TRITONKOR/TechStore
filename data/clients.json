@@ -1,0 +1,13 @@
+[ {
+  "id" : "0dc92785-9487-4206-a0bc-27f31a7902c9",
+  "username" : "tritonkor",
+  "hashPassword" : "$2a$10$ui0Ne8qxBYvf9TlMk0Gps.KdUegFp2ovRF0Ps25cXBjAXkElKFEom"
+}, {
+  "id" : "ff7af410-6068-4eb4-bced-23ba46c4def1",
+  "username" : "sanya",
+  "hashPassword" : "$2a$10$0VXJ5wjU2JaU5x6S2Pm5U.ywmp0gWaUoBnevdZsI1w/udr4R5zTIS"
+}, {
+  "id" : "299f9a37-8edf-4179-ae94-ae8405dfeeac",
+  "username" : "sasha",
+  "hashPassword" : "$2a$10$5ogC4B0i/rjq0ArWvCxiwu6WMj50LK7QjcbrzZ0BY7PYPWIrWVmO2"
+} ]

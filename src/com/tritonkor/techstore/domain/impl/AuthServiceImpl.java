@@ -13,21 +13,23 @@ import org.mindrot.bcrypt.BCrypt;
  */
 public class AuthServiceImpl implements AuthService {
 
+    /** The client repository used for client-related operations. */
     private final ClientDAO clientDAO;
 
+    /** The currently authenticated client. */
     private Client client;
 
     /**
      * Constructs a new AuthServiceImpl with the specified UserRepository.
      *
-     * @param clientDAO the user repository used for user-related operations.
+     * @param clientDAO the client repository used for client-related operations.
      */
     public AuthServiceImpl(ClientDAO clientDAO) {
         this.clientDAO = clientDAO;
     }
 
     /**
-     * Authenticates a user with the given username and password.
+     * Authenticates a client with the given username and password.
      *
      * @param username the username of the user.
      * @param password the password of the user.
@@ -46,20 +48,20 @@ public class AuthServiceImpl implements AuthService {
     }
 
     /**
-     * Checks if a user is currently authenticated.
+     * Checks if a client is currently authenticated.
      *
-     * @return true if the user is authenticated, false otherwise.
+     * @return true if the client is authenticated, false otherwise.
      */
     public boolean isAuthenticated() {
         return client != null;
     }
 
     /**
-     * Gets the authenticated user.
+     * Gets the authenticated client.
      *
-     * @return the authenticated user.
+     * @return the authenticated client.
      */
-    public Client getUser() {
+    public Client getClient() {
         return client;
     }
 
